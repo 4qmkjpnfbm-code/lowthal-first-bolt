@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lowthal Bot Wars — First Bolt</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div>
+          <h1>Lowthal Bot Wars</h1>
+          <div class="tag">First Bolt · soft Glow duels · ages 7–22 friendly</div>
+        </div>
+      </div>
+      <button type="button" class="theme-toggle" id="theme-toggle">Light sky</button>
+    </header>
+
+    <nav class="progress" aria-label="Play steps">
+      <span data-step="door">1 Door</span>
+      <span data-step="mint">2 Mint</span>
+      <span data-step="draft">3 Draft</span>
+      <span data-step="lineup">4 Lineup</span>
+      <span data-step="compete">5 Compete</span>
+      <span data-step="chronicle">6 Chronicle</span>
+      <span data-step="folio">7 Folio</span>
+    </nav>
+    <p id="progress-status" class="progress-status" aria-live="polite"></p>
+
+    <div class="tip-chips" aria-label="Helpful word chips">
+      <span class="helper-chip"><b>Folio</b> = saved story</span>
+      <span class="helper-chip"><b>Echo</b> = fun tale</span>
+      <span class="helper-chip"><b>Chronicle</b> = honest note</span>
+      <span class="helper-chip"><b>Glow · Care · Atlas</b> = shine · help · find the way</span>
+      <span class="helper-chip"><b>Edge · Even · Behind</b> = ahead · close · trailing</span>
+      <span class="helper-chip"><b>Soft Glow</b> = Folios stay safe</span>
+    </div>
+
+    <p id="folio-tip" class="footer-note" style="margin-top:0;margin-bottom:12px"></p>
+
+    <!-- DOOR -->
+    <section id="screen-door" class="screen panel">
+      <h2>Four witch &amp; wizard doors</h2>
+      <p class="lead">Knock a door — your Kin borrows that door’s soft gift.</p>
+      <p class="screen-tip">Tip: a Path Seal peeks out when you knock.</p>
+      <div class="mint-layout">
+        <div id="door-preview"></div>
+        <div>
+          <div class="doors" id="door-grid"></div>
+          <div class="actions">
+            <button type="button" class="primary" id="btn-door-next" disabled>Step through →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MINT -->
+    <section id="screen-mint" class="screen panel hidden">
+      <h2>Mint your door-born Kin Bot</h2>
+      <p class="lead">Share <strong>100</strong> Glow · Care · Atlas — tap a starter mix, then nudge.</p>
+      <p class="screen-tip">Tip: each axis keeps at least 1 · your door already gifted an ability!</p>
+      <div class="mint-layout">
+        <div id="mint-blob"></div>
+        <div>
+          <div id="mint-presets" class="mint-presets" aria-label="Starter mix presets"></div>
+          <p id="mint-preset-tip" class="mint-preset-tip" aria-live="polite"></p>
+          <div id="pool-box" class="pool-box"></div>
+          <div class="slider-block">
+            <label><span style="color:var(--glow)">Glow</span> <span id="val-glow">0</span></label>
+            <input id="slider-glow" type="range" min="1" max="98" />
+          </div>
+          <div class="slider-block">
+            <label><span style="color:var(--care)">Care</span> <span id="val-care">0</span></label>
+            <input id="slider-care" type="range" min="1" max="98" />
+          </div>
+          <div class="slider-block">
+            <label><span style="color:var(--atlas)">Atlas</span> <span id="val-atlas">0</span></label>
+            <input id="slider-atlas" type="range" min="1" max="98" />
+          </div>
+          <div id="mint-bars"></div>
+          <div class="actions">
+            <button type="button" class="primary" id="btn-mint-next">Looks lively — draft friends →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DRAFT -->
+    <section id="screen-draft" class="screen panel hidden">
+      <h2>Draft 2 Folio supports</h2>
+      <p class="lead">Pick two pals for your squad of three.</p>
+      <p class="screen-tip">Tip: Echo = sparkle · Chronicle = the honest bit.</p>
+      <p id="draft-count" style="font-weight:800;color:var(--gold)">0 of 2 picked</p>
+      <div class="pick-list" id="draft-list"></div>
+      <div class="actions">
+        <button type="button" class="primary" id="btn-draft-next" disabled>Set lineup order →</button>
+      </div>
+    </section>
+
+    <!-- LINEUP -->
+    <section id="screen-lineup" class="screen panel hidden">
+      <h2>Lineup 1 · 2 · 3</h2>
+      <p class="lead">Line up your three — chips update every ↑↓.</p>
+      <p class="screen-tip">Tip: Slot 1→Mist Blob · 2→Gloom Drip · 3→Haze Twin.</p>
+      <div class="lineup-cue" id="lineup-cue" aria-label="Pre-compete round cue"></div>
+      <div class="lineup" id="lineup-list"></div>
+      <div class="actions">
+        <button type="button" class="primary" id="btn-lineup-next">Compete vs Fog Crew →</button>
+      </div>
+    </section>
+
+    <!-- COMPETE -->
+    <section id="screen-compete" class="screen panel hidden">
+      <h2>Glow duel — Fog Crew</h2>
+      <p class="lead">Soft Glow duel after lineup. Fog thins or stays — nobody’s Folio gets wiped.</p>
+      <div class="scoreboard">
+        <span id="score-you">You: 0</span>
+        <span id="score-fog">Fog: 0</span>
+      </div>
+      <div class="arena" style="margin-top:12px">
+        <div id="arena-stage"></div>
+        <div id="skill-beat" class="skill-beat" aria-live="polite"></div>
+        <div class="battle-controls" aria-label="Battle pacing controls">
+          <p id="cheer-status" class="cheer-status" aria-live="polite">Cheer warms up in the duel…</p>
+          <button type="button" class="secondary cheer-ready" id="btn-battle-cheer" aria-pressed="false" aria-disabled="false">Tap to cheer ✦</button>
+          <button type="button" class="secondary" id="btn-battle-pause" aria-pressed="false">Pause beats</button>
+          <button type="button" class="secondary" id="btn-battle-replay">Replay skill cue</button>
+        </div>
+        <div class="battle-log" id="battle-log"></div>
+        <div id="battle-summary" class="chronicle-card hidden" style="margin-top:10px"></div>
+      </div>
+      <div class="actions">
+        <button type="button" class="primary hidden" id="btn-afterglow">Chronicle Shelf peek →</button>
+      </div>
+    </section>
+
+    <!-- CHRONICLE -->
+    <section id="screen-chronicle" class="screen panel hidden">
+      <h2>Chronicle Shelf</h2>
+      <p class="lead">One short card. Legend can be wild; Chronicle stays honest.</p>
+      <div class="chronicle-card" id="chronicle-body"></div>
+      <div class="actions">
+        <button type="button" class="primary" id="btn-save-folio">Save Folio →</button>
+      </div>
+    </section>
+
+    <!-- FOLIO -->
+    <section id="screen-folio" class="screen panel hidden">
+      <h2>Folio saved</h2>
+      <div id="folio-view"></div>
+      <div class="actions">
+        <button type="button" class="secondary" id="btn-replay">Play First Bolt again</button>
+      </div>
+    </section>
+
+    <p class="footer-note">Offline toy · no accounts · quest/door rarity later · no loot boxes · © Lowthal play prototype</p>
+  </div>
+  <script src="game.js?v=piper11-cheer-nodisabled"></script>
+</body>
+</html>
