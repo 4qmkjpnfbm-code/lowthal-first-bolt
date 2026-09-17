@@ -1,1 +1,39 @@
-/* PLACEHOLDER - will replace with full styles */
+/* Lowthal Bot Wars — First Bolt (kid-readable, offline) */
+:root {
+  --bg: #0f1220;
+  --bg2: #1a1f35;
+  --panel: #232a45;
+  --ink: #f4f1ff;
+  --muted: #a8b0d0;
+  --glow: #7ef0ff;
+  --care: #ff9ec8;
+  --atlas: #b8f26a;
+  --gold: #ffd56a;
+  --fog: #9aa3c7;
+  --danger: #ff7a8a;
+  --ok: #6dffb0;
+  --door1: #4ecdc4;
+  --door2: #ff6b6b;
+  --door3: #ffe66d;
+  --door4: #a78bfa;
+  --radius: 18px;
+  --shadow: 0 12px 40px rgba(0,0,0,.45);
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; min-height: 100%;
+  background: radial-gradient(1200px 600px at 20% -10%, #2a1f55, transparent),
+              radial-gradient(900px 500px at 100% 0%, #14384a, transparent),
+              var(--bg);
+  color: var(--ink);
+}
+body { padding: 16px; }
+
+.app {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+/* NOTE: Full styles.css body is large; this commit is replaced immediately with exact disk bytes via follow-up push_files. */
